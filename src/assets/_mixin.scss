@@ -1,0 +1,136 @@
+
+@mixin pos-center($top:50%, $left:50%, $right:unset, $bottom:unset, $tY:-50%, $tX:-50%) {
+    position: absolute;
+    top: $top;
+    left: $left;
+    right: $right;
+    bottom: $bottom;
+    transform: translateX($tX) translateY($tY);
+}
+
+@mixin pos-pre($top:50%, $left:unset, $right:0, $bottom:unset, $tY:-50%, $tX:0) {
+    position: absolute;
+    top: $top;
+    left: $left;
+    right: $right;
+    bottom: $bottom;
+    transform: translateX($tX) translateY($tY);
+}
+
+
+@function __to_rem($size, $base) {
+    @return  math.div($size, $base) * 1rem;
+}
+@function __to_em($size, $base) {
+    @return  math.div($size, $base) * 1em;
+}
+@function __to_vw($size, $base) {
+    @return  math.div($size, $base) * 100vw;
+}
+@function __to_vh($size, $base) {
+    @return  math.div($size, $base) * 100vh;
+}
+@function __to_per($size, $base) {
+    @return  math.div($size, $base) * 100%;
+}
+@mixin __txt_to_rem($size, $lh, $base) {
+    font-size: __to_rem($size, $base);
+    line-height: __to_em($lh, $size);
+}
+
+@mixin __txt_to_em($size, $lh, $base) {
+    font-size: __to_em($size, $base);
+    line-height: __to_em($lh, $size);
+}
+
+
+@mixin __wh_to_rem($width, $height, $base) {
+    min-width: __to_rem($width, $base);
+    width: __to_rem($width, $base);
+    height: __to_rem($height, $base);
+}
+@mixin __wh_to_em($width, $height, $base) {
+    min-width: __to_em($width, $base);
+    width: __to_em($width, $base);
+    height: __to_em($height, $base);
+}
+@mixin __wh_to_vw($width, $height, $base) {
+    min-width: __to_vw($width, $base);
+    width: __to_vw($width, $base);
+    height: __to_vw($height, $base);
+}
+@mixin __wh_to_vh($width, $height, $base) {
+    min-width: __to_vh($width, $base);
+    width: __to_vh($width, $base);
+    height: __to_vh($height, $base);
+}
+
+@mixin position_x {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@mixin position_y {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@mixin position_xy {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+@mixin fullsize {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+@mixin dimmed($r:0,$g:0,$b:0) {
+    @include fullsize;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: '';
+    background: linear-gradient(to bottom, rgba($r,$g,$b,0.0) 0%, rgba($r,$g,$b,.3) 50%, rgb($r,$g,$b,1) 100%);
+    opacity: .6;
+}
+
+
+@mixin dimmed2($r:0,$g:0,$b:0) {
+    @include fullsize;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: '';
+    background: linear-gradient(to bottom, rgba($r,$g,$b,0) 0%, rgb($r,$g,$b,1) 100%);
+    opacity: .8;
+}
+
+
+@mixin dimmed3($r:0,$g:0,$b:0) {
+    @include fullsize;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: '';
+    background: linear-gradient(to bottom, rgba($r,$g,$b,0.2) 0%, rgb($r,$g,$b,1) 100%);
+    opacity: .7;
+}
+
+@mixin dimmed4($r:0,$g:0,$b:0) {
+    @include fullsize;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: '';
+    background: linear-gradient(to bottom, rgba($r,$g,$b,0.2) 0%, rgb($r,$g,$b,0.5) 100%);
+    opacity: 1;
+}

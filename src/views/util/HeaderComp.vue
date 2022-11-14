@@ -9,7 +9,7 @@
           <router-link to="/board">Board</router-link>
         </li>
         <li class="login">
-          <router-link v-if="isAuth" to="/">LogOut</router-link>
+          <a v-if="isAuth" href="" @click.prevent="logout" >LogOut</a>
           <router-link v-else to="/login">Login</router-link>
         </li>
       </ul>
@@ -18,10 +18,18 @@
 </template>
 
 <script>
+import { setAuthInHeader } from '@/api'
 export default {
   computed: {
     isAuth() {
       return !!localStorage.getItem('token')
+    }
+  },
+  methods: {
+    logout() {
+      delete localStorage.token
+      setAuthInHeader(null)
+      this.$route.push('/login')
     }
   }
 

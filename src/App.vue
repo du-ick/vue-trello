@@ -1,28 +1,20 @@
 <template>
   <div id="app">
-    <Header />
-    <div class="base-content">
-      <router-view></router-view>
-    </div>
-    <Footer />
+    <Navbar />    
+    <router-view id="container"></router-view>
   </div>
 </template>
 
 <script>
-
-import Header from './views/util/HeaderComp.vue';
-import Footer from './views/util/FooterComp.vue';
+import Navbar from './components/NavbarComp.vue'
 
 export default {
-  name: 'App',
-  components: {
-    Header,
-    Footer,
-
+  name: 'app',
+  components: { Navbar },
+  data () {
+    return {
+    }
   }
 }
 </script>
 
-<style>
-  @import url(./assets/style.css);
-</style>

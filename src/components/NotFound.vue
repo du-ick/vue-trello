@@ -1,7 +1,5 @@
 <template>
-  <footer>
-    footer
-  </footer>
+  <div>Page not found</div>
 </template>
 
 <script>

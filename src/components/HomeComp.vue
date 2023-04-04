@@ -11,25 +11,27 @@
         <a class="new-board-btn" href="#" @click.prevent="SET_IS_ADD_BOARD(true)">Create new Board...</a>
       </div>
     </div>
-    <AddBoard v-if="isAddBoard" @submit="onAddBoard"/>
+    <AddBoard v-if="isAddBoard"/>
   </div>
 </template>
 
 <script>
-import { board } from '../api'
 import AddBoard from './AddBoard.vue';
-import { mapMutations, mapState } from 'vuex';
+import { mapMutations, mapState, mapActions } from 'vuex';
 
 export default {
   data() {
     return {
       loading: false,
-      boards: [],
       error: '',
     }
   },
   computed: {
-    ...mapState(['isAddBoard'])
+    ...mapState({
+      isAddBoard: 'isAddBoard',
+      boards: 'boards'
+    })
+
   },
   components: {
     'AddBoard' : AddBoard
@@ -46,20 +48,17 @@ export default {
     ...mapMutations([
       'SET_IS_ADD_BOARD'
     ]),
+    ...mapActions([
+      'FETCH_BOARDS'
+    ]),
 
     fetchData() {
       this.loading = true
-      board.fetch()
-        .then(data => {
-          this.boards = data.list
-        })
-        .finally(()=> {
-          this.loading = false
-        })
+      this.FETCH_BOARDS().finally(()=> {
+        this.loading = false
+      })
     },
-    onAddBoard(title) {
-      board.create(title).then(()=> this.fetchData())
-    }
+
   }
 }
 </script>

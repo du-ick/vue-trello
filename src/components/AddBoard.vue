@@ -17,7 +17,7 @@
 
 <script>
 import ModalComp from './ModalComp.vue'
-import mapMutations from 'vuex';
+import {mapMutations, mapActions} from 'vuex';
 
 export default {
     data() {
@@ -41,9 +41,15 @@ export default {
         ...mapMutations([
             'SET_IS_ADD_BOARD'
         ]),
+        ...mapActions([
+            'ADD_BOARD',
+            'FETCH_BOARD'
+        ]),
         addBoard() {
-            this.SET_IS_ADD_BOARD(false)
-            this.$emit('submit', this.input)
+            this.ADD_BOARD({title: this.input}).then(()=> {
+                this.SET_IS_ADD_BOARD(false)
+                this.FETCH_BOARD()
+            })
         }
     }
 
